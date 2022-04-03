@@ -20,7 +20,7 @@ async function buildHTML() {
   );
 }
 
-let needEmployee = true;
+// let needEmployee = true;
 const selectEmployeeMenu = async () => {
   let infoStr = "";
   let needEmployee = true;
@@ -42,7 +42,7 @@ const selectEmployeeMenu = async () => {
         }
       ])
       .then(async (data) => {
-        const { role, moreEmployees } = data;
+        const { role } = data;
         if(role == 'Manager'){
           infoStr = await buildManager();
         } else if(role == 'Engineer'){
@@ -207,5 +207,71 @@ const buildEngineer = async () => {
   return engineerStr;
 };
 
+
+const buildIntern = async () => {
+  let internStr = "";
+  await inquirer
+    .prompt([
+      {
+        name: "name",
+        type: "input",
+        message: "intern Name:",
+        validate: (answer) => {
+          if (answer) {
+            return true;
+          } else {
+            console.log("Please provide a name.");
+          }
+        }
+      },
+      {
+        name: "empId",
+        type: "input",
+        message: "Employee ID:",
+        validate: (answer) => {
+          if (answer) {
+            return true;
+          } else {
+            console.log("Please provide a employee ID.");
+          }
+        }
+      },
+      {
+        name: "email",
+        type: "input",
+        message: "Email:",
+        validate: (answer) => {
+          if (answer) {
+            return true;
+          } else {
+            console.log("Please provide a email.");
+          }
+        }
+      },
+      {
+        name: "gitHub",
+        type: "input",
+        message: "Github username:",
+        validate: (answer) => {
+          if (answer) {
+            return true;
+          } else {
+            console.log("Please provide an github username.");
+          }
+        }
+      }
+    ])
+    .then((data) => {
+      const { name, empId, email, gitHub } = data;
+      const intern = new Intern(name, empId, email);
+      intern.addGithub(gitHub);
+      internStr = `
+      <p>${intern.name}</p>
+      <p>${intern.employeeID}</p>
+      <p>${intern.emailAddress}</p>
+      <p>${intern.schoolName}</p>`;
+    });
+  return internStr;
+};
 
 buildHTML();
