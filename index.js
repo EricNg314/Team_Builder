@@ -128,11 +128,7 @@ const buildManager = async () => {
       const { name, empId, email, officeNumb } = data;
       const manager = new Manager(name, empId, email);
       manager.addOfficeNumber(officeNumb);
-      managerStr = `
-      <p>${manager.name}</p>
-      <p>${manager.employeeID}</p>
-      <p>${manager.emailAddress}</p>
-      <p>${manager.officeNumber}</p>`;
+      managerStr = manager.returnHtml();
     });
   return managerStr;
 };
@@ -194,12 +190,7 @@ const buildEngineer = async () => {
       const { name, empId, email, gitHub } = data;
       const engineer = new Engineer(name, empId, email);
       engineer.addGithub(gitHub);
-      engineerStr = `
-      <p>${engineer.name}</p>
-      <p>${engineer.employeeID}</p>
-      <p>${engineer.emailAddress}</p>
-      <p>${engineer.ghUserName}</p>
-      <p>${engineer.ghLink}</p>`;
+      engineerStr = engineer.returnHtml();
     });
   return engineerStr;
 };
@@ -212,7 +203,7 @@ const buildIntern = async () => {
       {
         name: "name",
         type: "input",
-        message: "intern Name:",
+        message: "Intern Name:",
         validate: (answer) => {
           if (answer) {
             return true;
@@ -262,11 +253,7 @@ const buildIntern = async () => {
       const { name, empId, email, gitHub } = data;
       const intern = new Intern(name, empId, email);
       intern.addSchool(gitHub);
-      internStr = `
-      <p>${intern.name}</p>
-      <p>${intern.employeeID}</p>
-      <p>${intern.emailAddress}</p>
-      <p>${intern.schoolName}</p>`;
+      internStr = intern.returnHtml();
     });
   return internStr;
 };
