@@ -4,16 +4,13 @@ const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const htmlTemplate = require("./lib/htmlTemplate");
 
 async function buildHTML() {
   let htmlInfoStr = "";
   const filename = "./sample/index.html";
-  // const managerStr = await buildManager();
-  // const engineerStr = await buildEngineer();
-
   const employeesStr = await selectEmployeeMenu();
-
-  htmlInfoStr += `${employeesStr}`;
+  htmlInfoStr = htmlTemplate(employeesStr)
   console.log(htmlInfoStr);
   fs.writeFile(filename, htmlInfoStr, (err) =>
     err ? console.log(err) : console.log(`Success! Please check ${filename}`)
@@ -44,11 +41,11 @@ const selectEmployeeMenu = async () => {
       .then(async (data) => {
         const { role } = data;
         if(role == 'Manager'){
-          infoStr = await buildManager();
+          infoStr += await buildManager();
         } else if(role == 'Engineer'){
-          infoStr = await buildEngineer();
+          infoStr += await buildEngineer();
         } else if(role == 'Intern'){
-          infoStr = await buildIntern();
+          infoStr += await buildIntern();
         }
         needEmployee = await addMore();
         console.log('needEmployee? ', needEmployee)
@@ -264,7 +261,7 @@ const buildIntern = async () => {
     .then((data) => {
       const { name, empId, email, gitHub } = data;
       const intern = new Intern(name, empId, email);
-      intern.addGithub(gitHub);
+      intern.addSchool(gitHub);
       internStr = `
       <p>${intern.name}</p>
       <p>${intern.employeeID}</p>
