@@ -23,7 +23,7 @@ async function buildHTML() {
 let needEmployee = true;
 const selectEmployeeMenu = async () => {
   let infoStr = "";
-  // let needEmployee = true;
+  let needEmployee = true;
   while (needEmployee === true) {
     await inquirer
       .prompt([
