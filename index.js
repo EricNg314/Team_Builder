@@ -237,22 +237,22 @@ const buildIntern = async () => {
         }
       },
       {
-        name: "gitHub",
+        name: "school",
         type: "input",
-        message: "Github username:",
+        message: "School name:",
         validate: (answer) => {
           if (answer) {
             return true;
           } else {
-            console.log("Please provide an github username.");
+            console.log("Please provide an school username.");
           }
         }
       }
     ])
     .then((data) => {
-      const { name, empId, email, gitHub } = data;
+      const { name, empId, email, school } = data;
       const intern = new Intern(name, empId, email);
-      intern.addSchool(gitHub);
+      intern.addSchool(school);
       internStr = intern.returnHtml();
     });
   return internStr;
