@@ -10,7 +10,7 @@
 Command line application to build a quick HTML file to display team member information. See sample folder for a generated preview.
 
 
-
+https://user-images.githubusercontent.com/38299163/161462360-33c86c96-0d5b-4191-b624-e4edf9e73fee.mov
 
 
 ## Table Of Contents 
