@@ -15,3 +15,15 @@ test('adds github name and link', () => {
   expect(engineer.ghUserName).toBe('exampleGit');
   expect(engineer.ghLink).toBe('https://github.com/exampleGit');
 })
+
+test('retrieve HTML string from Engineer', () => {
+  const engineer = new Engineer('John', '02', 'example@example.com');
+  engineer.addGithub('exampleGit')
+
+  const returnedHtml = engineer.returnHtml();
+  
+  expect(returnedHtml.includes('>John</h2>')).toBeTruthy();
+  expect(returnedHtml.includes('>ID: 02</li>')).toBeTruthy();
+  expect(returnedHtml.includes('>example@example.com</a>')).toBeTruthy();
+  expect(returnedHtml.includes('href="https://github.com/exampleGit" target="_blank">exampleGit</a></li>')).toBeTruthy();
+})

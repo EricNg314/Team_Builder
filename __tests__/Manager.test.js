@@ -14,3 +14,15 @@ test('adds office number to Manager', () => {
   
   expect(manager.officeNumber).toBe('10');
 })
+
+test('retrieve HTML string from Manager', () => {
+  const manager = new Manager('John', '02', 'example@example.com');
+  manager.addOfficeNumber('10')
+  
+  const returnedHtml = manager.returnHtml();
+
+  expect(returnedHtml.includes('>John</h2>')).toBeTruthy();
+  expect(returnedHtml.includes('>ID: 02</li>')).toBeTruthy();
+  expect(returnedHtml.includes('>example@example.com</a>')).toBeTruthy();
+  expect(returnedHtml.includes('>Office Number: 10</li>')).toBeTruthy();
+})
